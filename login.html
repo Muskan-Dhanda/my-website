@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - IULT</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 300px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background: #667eea;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+    <h2>LOGIN</h2>
+    <input type="email" id="email" placeholder="Enter Chitkara Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login() {
+    let email = document.getElementById("email").value;
+
+    if(email.endsWith("@chitkara.edu.in")) {
+        alert("Login Successful ✅");
+        window.location.href = "index.html";
+    } else {
+        alert("❌ Only Chitkara University students allowed!");
+    }
+}
+</script>
+
+</body>
+</html>
