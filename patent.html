@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IULT - Inter-University Learning & Teaching | Chitkara University</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse">ircle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/>ircle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/>ircle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Aims Section */
+        .aims-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .aim-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aim-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .aim-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .aim-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* How it Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+        }
+
+        .demo-login {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .demo-login h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Challenges */
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .challenge-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h4 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i> IULT
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#aims">Aims</a></li>
+                <li><a href="#how">How it Works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+            </ul>
+            <button class="cta-btn" onclick="document.getElementById('demo').scrollIntoView()">
+                <i class="fas fa-rocket"></i> Try Demo
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>IULT - Inter-University Learning & Teaching</h1>
+            <p>Revolutionary AI-powered peer learning platform exclusively for Chitkara University. Learn, teach, earn, and collaborate like never before.</p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn-primary">🚀 Try Demo Now</a>
+                <a href="#how" class="btn-primary">How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aims Section -->
+    <section id="aims" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="aims-grid">
+                <div class="aim-card">
+                    <div class="aim-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Centralized Academic Hub</h3>
+                    <p>Create a unified support system connecting Chitkara students and faculty for seamless academic collaboration.</p>
+                </div>
+                <div class="aim-card">
+                    <div class="aim-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Peer-to-Peer Learning</h3>
+                    <p>Enable students to teach, learn, and collaborate with peers across all years and disciplines.</p>
+                </div>
+                <div class="aim-card">
+                    <div class="aim-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Enhanced Platform</h3>
+                    <p>Leverage cutting-edge AI for smart matching, note sharing, and personalized academic mentoring.</p>
+                </div>
+                <div class="aim-card">
+                    <div class="aim-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Earn While Teaching</h3>
+                    <p>Empower students to monetize their expertise while helping peers master complex subjects.</p>
+                </div>
+                <div class="aim-card">
+                    <div class="aim-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Academic Generosity</h3>
+                    <p>Foster a culture of knowledge sharing and academic entrepreneurship within Chitkara.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="section" style="background: #f8f9ff;">
+        <div class="container">
+            <h2 class="section-title">How IULT Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register</h3>
+                    <p>Login using your Chitkara University credentials</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Post Topic</h3>
+                    <p>Share the subject/topic you need help with (e.g., Maxwell's equations)</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>AI Matching</h3>
+                    <p>AI instantly matches you with expert peers/faculty</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Connect & Learn</h3>
+                    <p>Choose chat, video call, or in-person meetup</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Share & Earn</h3>
+                    <p>Exchange notes, rate session, earn if teaching</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Multiple Interaction Modes</h3>
+                    <p>Chat, audio, video calls, or campus meetups</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Note Exchange</h3>
+                    <p>Upload, share, and download study materials</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Feedback System</h3>
+                    <p>Ratings ensure quality mentoring</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Assistant</h3>
+                    <p>Instant summaries, quizzes, explanations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Monetization</h3>
+                    <p>Earn by teaching peers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Track learning progress and performance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="section demo-section">
+        <div class="container">
+            <h2 class="section-title">Live Demo</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #666;">
+                Experience IULT in action - Patent ready demo for presentation
+            </p>
+            <div class="demo-login">
+                <h3><i class="fas fa-sign-in-alt"></i> Chitkara Login Demo</h3>
+                <div class="form-group">
+                    <input type="email" placeholder="student@chitkara.edu.in" id="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="University ID Password" id="password">
+                </div>
+                <button class="cta-btn" style="width: 100%; margin-top: 1rem;" onclick="loginDemo()">
+                    <i class="fas fa-unlock"></i> Login & Explore Platform
+                </button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                    Demo Credentials: student@chitkara.edu.in / chitkara123
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Case -->
+    <section class="section" style="background: #f8f9ff;">
+        <div class="container">
+            <h2 class="section-title">Real World Example</h2>
+            <div style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto;">
+                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1;">
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">
+                            <i class="fas fa-lightbulb"></i> Scenario: Maxwell's Equations
+                        </h3>
+                        <p><strong>2nd Year Student:</strong> Posts difficulty with Maxwell's equations → AI matches with 4th year expert → Video session + notes shared → Pays ₹50 → Both benefit!</p>
+                    </div>
+                    <div style="flex: 1; text-align: center;">
+                        <i class="fas fa-brain" style="font-size: 5rem; color: #667eea;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Challenges & Solutions</h2>
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <h4><i class="fas fa-shield-alt"></i> Quality Control</h4>
+                    <p>AI verification + faculty oversight + rating system ensures reliable content</p>
+                </div>
+                <div class="challenge-card">
+                    <h4><i class="fas fa-lock"></i> Privacy</h4>
+                    <p>University-grade security + GDPR compliance + encrypted sessions</p>
+                </div>
+                <div class="challenge-card">
+                    <h4><i class="fas fa-balance-scale"></i> Ethics</h4>
+                    <p>Free tier available + transparent pricing + academic integrity checks</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">Ready to Transform Chitkara Learning?</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.95;">Patent-ready platform for academic excellence</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#demo" class="btn-primary" style="background: white; color: #667eea;">Live Demo</a>
+                    <button class="cta-btn" onclick="contactDean()">📞 Contact Dean</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>IULT Platform</h4>
+                    <p>Chitkara University's revolutionary peer learning ecosystem powered by AI.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul style="list-style: none;">
+                        <li><a href="#home" style="color: #ccc; text-decoration: none;">Home</a></li>
+                        <li><a href="#aims" style="color: #ccc; text-decoration: none;">Aims</a></li>
+                        <li><a href="#features" style="color: #ccc; text-decoration: none;">Features</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p>Chitkara University<br>Patent Presentation Ready<br>2025</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #333; color: #666;">
+                <p>&copy; 2025 IULT - Inter-University Learning & Teaching | Patent Pending</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').style.background = window.scrollY > 100 
+                ? 'rgba(255, 255, 255, 0.98)' 
+                : 'rgba(255, 255, 255, 0.95)';
+        });
+
+        // Demo login
+        function loginDemo() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email === 'student@chitkara.edu.in' && password === 'chitkara123') {
+                alert('🎉 Welcome to IULT! Platform accessed successfully.\n\nDemo Features Unlocked:\n✅ AI Topic Matching\n✅ Video Call Simulation\n✅ Note Sharing\n✅ Payment Gateway\n✅ Rating System\n\nPerfect for Dean Presentation!');
+                // Simulate dashboard
+                document.querySelector('.demo-login').innerHTML = `
+                    <h3 style="color: #28a745;"><i class="fas fa-check-circle"></i> Welcome to Dashboard!</h3>
+                    <div style="background: #d4edda; padding: 1.5rem; border-radius: 10px; margin-top: 1rem;">
+                        <p><strong>Active Sessions:</strong> 3</p>
+                        <p><strong>Earnings:</strong> ₹250</p>
+                        <p><strong>Rating:</strong> 4.9⭐</p>
+                        <button class="cta-btn" style="width: 100%; margin-top: 1rem;" onclick="startSession()">Start New Session</button>
+                    </div>
+                `;
+            } else {
+                alert('⚠️ Please use demo credentials:\nstudent@chitkara.edu.in\nchitkara123');
+            }
+        }
+
+        function contactDean() {
+            alert('📞  Contact Info:\n\nName: [Muskan]\nEmail: dean@chitkara.edu.in\n\n"Presenting IULT - Patent-Ready Peer Learning Platform"\n\n✅ Live Demo Ready\n✅ Fully Functional\n✅ Professional UI/UX\n✅ Mobile Responsive\n✅ Ready for Approval!');
+        }
+
+        function startSession() {
+            alert('🎥 Starting Video Session...\n\n📚 Topic: Maxwell\'s Equations\n👨‍🏫 Mentor: 4th Year Expert\n💰 Fee: ₹50\n⏱️ Duration: 30 mins\n\nSession simulation complete! Perfect for patent demo.');
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        });
+
+        document.querySelectorAll('.aim-card, .feature-card, .step').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
